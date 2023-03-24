@@ -10,6 +10,7 @@ import {
     ManyToOne,
     JoinColumn
 } from "typeorm";
+import { Class } from "../classes/classes.entity";
 import { Roles } from "../core/enum";
 import { Mark } from "../marks/mark.entity";
 import { TestDetail } from "../testdetails/tesdetails.entity";
@@ -64,4 +65,13 @@ export class User {
     @OneToMany(() => Test, (Test) => Test.teacher)
     tests: Relation<Test>[];
 
+    @OneToMany(() => Class, (Class) => Class.teacher)
+    classes: Relation<Class>[];
+
+    @ManyToOne(() => Class, (Class) => Class.users)
+    @JoinColumn()
+    class: Relation<Class>;
+
+    @Column({ nullable: true })
+    classId: number
 }
