@@ -14,7 +14,8 @@ export async function createTest(req: Request, res: Response, next: NextFunction
             type: Joi.string().valid(...Object.values(TypeTest)),
             startDate: Joi.date().required(),
             time: Joi.number().required(),
-            teacherId: Joi.number().required()
+            teacherId: Joi.number().required(),
+            classId: Joi.number().required(),
         })
 
         const { files, ...value } = validate({

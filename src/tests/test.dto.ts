@@ -5,4 +5,8 @@ export class createTestDTO {
     type: TypeTest
     questionURL: string
     answerURL: string
+    startDate: Date
+    time: number
+    teacherId: number
+    classId: number
 }
