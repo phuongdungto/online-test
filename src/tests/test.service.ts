@@ -12,15 +12,32 @@ import { Pagination } from "../core/utils/pagination.util";
 import * as fs from 'fs/promises'
 import * as path from 'path';
 import { TypeTest } from "../core/enum";
+import { Class } from "../classes/classes.entity";
+import { User } from "../users/user.entity";
+import { sendEmail } from '../core/utils/send-email.util';
+
 const WordExtractor = require("word-extractor");
 
 const TEMPLATE_DIR = '../../public/filesQandA'
 
 
 const testRepo = AppDataSource.getRepository(Test);
+const classRepo = AppDataSource.getRepository(Class);
+const usersRepo = AppDataSource.getRepository(User);
 
 export async function createTest(createTestDTO: createTestDTO) {
-    const test = testRepo.save(createTestDTO);
+    const test = await testRepo.save(createTestDTO);
+    const getEmails = await usersRepo.find({ where: { classId: createTestDTO.classId }, select: ['email'] })
+    const gets = getEmails.map(email => (
+        email.email
+    ))
+    console.log(gets)
+    sendEmail({
+        email: gets,
+        subject: "ENGLISH",
+        template: 'send-otp',
+        context: { startDate: createTestDTO.startDate, time: createTestDTO.time }
+    }).catch(error => console.log(error));
     return test;
 }
 
