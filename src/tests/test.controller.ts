@@ -42,3 +42,22 @@ export async function getTest(req: Request, res: Response, next: NextFunction) {
         return next(error);
     }
 }
+
+export async function getTests(req: Request, res: Response, next: NextFunction) {
+    try {
+        const schema = Joi.object({
+            page: Joi.number().default(1),
+            limit: Joi.number().default(5),
+            sort: Joi.string().allow(''),
+            sortBy: Joi.object().valid(...Object.values(['asc', 'desc'])).allow(''),
+            name: Joi.string().allow(''),
+            teacherId: Joi.number().allow(''),
+            classId: Joi.number().allow('')
+        });
+        const value = validate(req.query, schema);
+        const result = await testService.getTests(value);
+        return res.status(200).send(result);
+    } catch (error) {
+        return next(error);
+    }
+}

@@ -99,3 +99,11 @@ export async function getTest(testId: number) {
         console.log(value)
     }
 }
+
+export async function getTests(value) {
+    const query = Pagination(Test, value);
+    const [list, count] = await testRepo.findAndCount({
+        ...query
+    })
+    return { totalPages: Math.ceil(count / value.limit), tests: list };
+}
