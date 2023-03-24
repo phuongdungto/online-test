@@ -7,6 +7,7 @@ import { TestDetail } from "../testdetails/tesdetails.entity";
 import { Mark } from "../marks/mark.entity";
 import { init1679655691056 } from "../migrations/1679655691056-init";
 import { updateTest1679657689109 } from "../migrations/1679657689109-update-test";
+import { updateUser1679677528800 } from "../migrations/1679677528800-updateUser"
 
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -23,7 +24,7 @@ export const AppDataSource = new DataSource({
     entities: [User, Test, TestDetail, Mark],
     //entities: [path.resolve('src/**/*.entity.ts')],
     subscribers: [],
-    migrations: [init1679655691056, updateTest1679657689109],
+    migrations: [init1679655691056, updateTest1679657689109, updateUser1679677528800],
     //migrations: [path.join(__dirname, "../migrations/*{.js,.ts}")],
     namingStrategy: new SnakeNamingStrategy(),
     synchronize: false,
