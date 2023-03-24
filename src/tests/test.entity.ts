@@ -10,40 +10,27 @@ import {
     ManyToOne,
     JoinColumn
 } from "typeorm";
-import { Roles } from "../core/enum";
+import { Roles, TypeTest } from "../core/enum";
 import { Mark } from "../marks/mark.entity";
 import { TestDetail } from "../testdetails/tesdetails.entity";
-@Entity('users')
-export class User {
-    constructor(data: Partial<User>) {
+@Entity('tests')
+export class Test {
+    constructor(data: Partial<Test>) {
         Object.assign(this, data);
     }
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
 
-    @Column({ name: 'fullname' })
-    fullname: string;
-
-    @Column({ name: 'email', nullable: false })
-    email: string;
-
-    @Column({ name: 'password', select: false })
-    password?: string;
+    @Column({ name: 'name' })
+    name: string;
 
     @Column({
-        name: 'role',
+        name: 'type',
         type: 'enum',
-        enum: Roles,
-        default: Roles.STUDENT,
+        enum: TypeTest,
         nullable: false
     })
-    role: Roles;
-
-    @Column()
-    numberPhone: string;
-
-    @Column()
-    birthDay: Date;
+    type: TypeTest;
 
     @CreateDateColumn()
     createdAt: Date;
@@ -54,10 +41,10 @@ export class User {
     @DeleteDateColumn({ default: null })
     deletedAt: Date;
 
-    @OneToMany(() => TestDetail, (testDetail) => testDetail.user)
+    @OneToMany(() => TestDetail, (testDetail) => testDetail.test)
     testdetails: Relation<TestDetail>[];
 
-    @OneToMany(() => Mark, (Mark) => Mark.user)
+    @OneToMany(() => Mark, (Mark) => Mark.test)
     marks: Relation<Mark>[];
 
 }

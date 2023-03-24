@@ -6,8 +6,6 @@ import bodyParser from 'body-parser';
 import { NotFound } from 'http-errors';
 import { AppDataSource } from "./core/database";
 import userRouter from "./users/user.router";
-import projectRouter from "./projects/project.router";
-import taskRouter from "./tasks/task.router"
 import * as resUtil from "./core/utils/res.util";
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -25,8 +23,6 @@ async function App() {
     }).catch((error) => console.log(error))
 
     app.use('/users', userRouter);
-    app.use('/projects', projectRouter);
-    app.use('/tasks', taskRouter);
 
     app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
         return next(new NotFound('Route not found'))
