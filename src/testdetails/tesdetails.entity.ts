@@ -36,7 +36,7 @@ export class TestDetail {
     testId: number
 
     @Column({ nullable: true })
-    question: number
+    question: string
 
     @Column({ nullable: true })
     answer: number

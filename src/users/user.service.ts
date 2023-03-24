@@ -46,3 +46,19 @@ export async function signin(CreateUserDTO: CreateUserDTO) {
     delete user.password;
     return { information: user, accessToken };
 }
+
+export async function createUser(createUserDTO: CreateUserDTO) {
+    const ROUNDS_NUMBER = 10;
+    const duplicatedUser = await userRepo.findOneBy({
+        email: createUserDTO.email
+    });
+    if (duplicatedUser) {
+        throw new BadRequest('Email already existed');
+    }
+    const newUser = new User(createUserDTO);
+    newUser.password = await bcrypt.hash(createUserDTO.password, ROUNDS_NUMBER);
+
+    await userRepo.save(newUser);
+    delete newUser.password;
+    return newUser;
+}
