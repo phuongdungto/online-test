@@ -32,6 +32,12 @@ export class Test {
     })
     type: TypeTest;
 
+    @Column()
+    questionUrl: string;
+
+    @Column()
+    answerUrl: string;
+
     @CreateDateColumn()
     createdAt: Date;
 
