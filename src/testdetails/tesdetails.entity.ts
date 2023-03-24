@@ -39,7 +39,7 @@ export class TestDetail {
     question: string
 
     @Column({ nullable: true })
-    answer: number
+    answer: string
 
     @CreateDateColumn()
     createdAt: Date;
