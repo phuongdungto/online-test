@@ -11,7 +11,10 @@ export async function createTest(req: Request, res: Response, next: NextFunction
         const schema = Joi.object({
             files: Joi.array().required().min(2).max(2),
             name: Joi.string().required(),
-            type: Joi.string().valid(...Object.values(TypeTest))
+            type: Joi.string().valid(...Object.values(TypeTest)),
+            startDate: Joi.date().required(),
+            time: Joi.number().required(),
+            teacherId: Joi.number().required()
         })
 
         const { files, ...value } = validate({

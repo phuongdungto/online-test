@@ -10,6 +10,7 @@ import {
     ManyToOne,
     JoinColumn
 } from "typeorm";
+import { Class } from "../classes/classes.entity";
 import { Roles, TypeTest } from "../core/enum";
 import { Mark } from "../marks/mark.entity";
 import { TestDetail } from "../testdetails/tesdetails.entity";
@@ -60,4 +61,17 @@ export class Test {
 
     @Column({ nullable: true })
     teacherId: number
+
+    @ManyToOne(() => Class, (Class) => Class.tests)
+    @JoinColumn()
+    class: Relation<Class>;
+
+    @Column({ nullable: true })
+    classId: number
+
+    @Column()
+    startDate: Date
+
+    @Column()
+    time: number
 }

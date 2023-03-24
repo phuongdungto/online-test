@@ -34,3 +34,24 @@ export async function signin(req: Request, res: Response, next: NextFunction) {
     }
 }
 
+export async function createUser(req: Request, res: Response, next: NextFunction) {
+    try {
+        const schema = Joi.object({
+            email: Joi.string().email().required(),
+            password: Joi.string().min(8).required(),
+            fullname: Joi.string().max(255).required(),
+            birthDay: Joi.date(),
+            numberPhone: Joi.string().min(10).max(11),
+            role: Joi.string().default(Roles.STUDENT),
+        });
+
+        const value = validate<CreateUserDTO>(req.body, schema);
+
+        const result = await userService.createUser(value)
+        return res.status(201).send(result);
+
+    } catch (error) {
+        return next(error);
+    }
+}
+

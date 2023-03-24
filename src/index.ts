@@ -7,6 +7,7 @@ import { NotFound } from 'http-errors';
 import { AppDataSource } from "./core/database";
 import userRouter from "./users/user.router";
 import testRouter from "./tests/test.router";
+import testDetailsRouter from "./testdetails/testdetails.router"
 import * as resUtil from "./core/utils/res.util";
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -25,6 +26,7 @@ async function App() {
 
     app.use('/users', userRouter);
     app.use('/test', testRouter);
+    app.use('/testdetails', testDetailsRouter);
 
     app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
         return next(new NotFound('Route not found'))

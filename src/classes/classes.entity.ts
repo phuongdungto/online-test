@@ -11,6 +11,7 @@ import {
     JoinColumn
 } from "typeorm";
 import { Roles, TypeTest } from "../core/enum";
+import { Test } from "../tests/test.entity";
 import { User } from "../users/user.entity";
 @Entity('classes')
 export class Class {
@@ -41,5 +42,10 @@ export class Class {
 
     @OneToMany(() => User, (user) => user.class)
     users: Relation<User>[];
+
+    @OneToMany(() => Test, (test) => test.class)
+    tests: Relation<Test>[];
+
+
 
 }
