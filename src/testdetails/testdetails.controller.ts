@@ -11,14 +11,28 @@ export async function createTestDetails(req: Request, res: Response, next: NextF
             testId: Joi.number().required(),
             testDetails: Joi.array().items({
                 userId: Joi.number().required(),
-                testId: Joi.number().required(),
                 question: Joi.string().required(),
                 answer: Joi.string().required(),
             }).min(1).required(),
         })
         const value = validate(req.body, schema);
-        const result = await testDetailsService.createTestDetails(value);
+        await testDetailsService.createTestDetails(value);
         return res.status(200).send();
+    } catch (error) {
+        return next(error);
+    }
+}
+
+export async function compareTestDetails(req: Request, res: Response, next: NextFunction) {
+    try {
+        const schema = Joi.object({
+            testId: Joi.number().required(),
+            userId: Joi.number().required(),
+        })
+
+        const value = validate(req.query, schema);
+        const result = await testDetailsService.compareTestDetails(value);
+        return res.status(200).send(result);
     } catch (error) {
         return next(error);
     }
