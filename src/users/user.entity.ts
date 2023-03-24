@@ -13,6 +13,7 @@ import {
 import { Roles } from "../core/enum";
 import { Mark } from "../marks/mark.entity";
 import { TestDetail } from "../testdetails/tesdetails.entity";
+import { Test } from "../tests/test.entity";
 @Entity('users')
 export class User {
     constructor(data: Partial<User>) {
@@ -59,5 +60,8 @@ export class User {
 
     @OneToMany(() => Mark, (Mark) => Mark.user)
     marks: Relation<Mark>[];
+
+    @OneToMany(() => Test, (Test) => Test.teacher)
+    tests: Relation<Test>[];
 
 }

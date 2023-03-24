@@ -21,8 +21,8 @@ export async function createTest(req: Request, res: Response, next: NextFunction
         console.log(files);
         const result = await testService.createTest({
             ...value,
-            questionUrl: files[0],
-            answerUrl: files[1],
+            questionUrl: files[1],
+            answerUrl: files[0],
         })
         return res.status(201).send(result);
     } catch (error) {
@@ -32,8 +32,9 @@ export async function createTest(req: Request, res: Response, next: NextFunction
 
 export async function getTest(req: Request, res: Response, next: NextFunction) {
     try {
-
+        const result = await testService.getTest(+req.params.id);
+        return res.status(200).send(result)
     } catch (error) {
-
+        return next(error);
     }
 }
