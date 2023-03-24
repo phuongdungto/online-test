@@ -38,6 +38,7 @@
     "joi": "^17.8.4",
     "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.2.0",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.3.12",
@@ -52,6 +53,7 @@
     "@types/bcrypt": "^5.0.0",
     "@types/http-errors": "^2.0.1",
     "@types/jsonwebtoken": "^9.0.1",
+    "@types/multer": "^1.4.7",
     "nodemon": "^2.0.21",
     "rimraf": "^4.4.0",
     "ts-node": "^10.9.1"
